@@ -22,7 +22,7 @@ import { CartProvider } from "./context/CartContext";
 import ProductCatogory from "./pages/ProductCatogory";
 import AddProduct from "./components/AddProduct";
 import Cart from "./components/Cart/Cart";
-import Brands from "./components/Brands"
+import Brands from "./components/Brands";
 const App = () => {
   const { user } = useContext(AuthContext);
 
@@ -30,7 +30,7 @@ const App = () => {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
+        <Route path="/" element={<Home/>} />
         <Route path="/addproduct" element={<AddProduct />} />
         <Route path="/products/:id" element={<ProductDetails />} />
 
@@ -44,7 +44,10 @@ const App = () => {
           element={!user ? <Login /> : <Navigate to="/" />}
         />
         <Route path="*" element={<NotFound />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route
+          path="/cart"
+          element={user ? <Cart /> : <Navigate to="/login" />}
+        />
         <Route path="/brands" element={<Brands />} />
       </Routes>
       <Newsletter />

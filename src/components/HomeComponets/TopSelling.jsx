@@ -38,17 +38,24 @@ const TopSelling = () => {
       {error ? (
         <p className="text-red-500 text-center">{error}</p>
       ) : (
-        <div className="flex justify-center lg:flex-row md:flex-wrap sm:flex-col gap-10">
+        <div
+          className="flex overflow-x-auto snap-x snap-mandatory gap-6 scrollbar-hide"
+          style={{ scrollSnapType: "x mandatory" }}
+        >
           {products.map((product) => {
             const averageRating = calculateAverageRating(product.reviews);
             const reviewCount = product.reviews ? product.reviews.length : 0;
 
             return (
-              <Link key={product._id} to={`/products/${product._id}`}>
+              <Link
+                key={product._id}
+                to={`/products/${product._id}`}
+                className="flex-shrink-0 snap-center"
+              >
                 <Card
                   isPressable
                   isHoverable
-                  className="transition-none hover:scale-105 shadow-md"
+                  className="transition-none hover:scale-105 shadow-md w-64"
                 >
                   <CardBody>
                     <Image
@@ -87,7 +94,6 @@ const TopSelling = () => {
 
       <div className="flex justify-center mt-8">
         <Link to={"/products"}>
-          {" "}
           <Button className="bg-white text-black border-2 border-black px-6 py-3 rounded-lg hover:bg-gray-100 transition duration-300">
             View All
           </Button>
